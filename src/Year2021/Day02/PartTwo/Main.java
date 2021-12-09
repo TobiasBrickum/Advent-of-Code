@@ -20,7 +20,7 @@ public class Main
     {
         List<String> taskNumbersList = new LinkedList<>();
         String[] taskIdentifier = new String[]{"up", "down", "forward"};
-        int[] taskIdentifierCounter = new int[3]; // 0 = "up", "down", "forward"
+        int[] taskIdentifierCounter = new int[3]; // 0 = "aim", "depth", "horizon"
 
         try
         {
@@ -34,25 +34,24 @@ public class Main
 
                 if(temp.startsWith(taskIdentifier[0])) // up
                 {
-                    taskIdentifierCounter[0] += b; // up
-                    taskIdentifierCounter[1] -= b; // down
+                    taskIdentifierCounter[0] -= b; // aim
                 }
                 else if(temp.startsWith(taskIdentifier[1])) // down
                 {
-                    taskIdentifierCounter[0] -= b; // up
-                    taskIdentifierCounter[1] += b; // down
+                    taskIdentifierCounter[0] += b; // aim
                 }
                 else if(temp.startsWith(taskIdentifier[2])) // forward
                 {
-                    taskIdentifierCounter[2] += b; // forward
+                    taskIdentifierCounter[2] += b; // horizon
+                    taskIdentifierCounter[1] += b * taskIdentifierCounter[0]; // depth
                 }
             }
             scannTaskFile.close();
 
             System.out.println("What do you get if you multiply your final horizontal position by your final depth?");
-            System.out.println("\tMax up:"+ taskIdentifierCounter[0]);
-            System.out.println("\tMax down:"+ taskIdentifierCounter[1]);
-            System.out.println("\tMax forward: "+ taskIdentifierCounter[2]);
+            System.out.println("\tMax aim:"+ taskIdentifierCounter[0]);
+            System.out.println("\tMax depth:"+ taskIdentifierCounter[1]);
+            System.out.println("\tMax horizon: "+ taskIdentifierCounter[2]);
             System.out.println("Answer: " + taskIdentifierCounter[1] * taskIdentifierCounter[2]);
         }
         catch (Exception e)
