@@ -13,10 +13,10 @@ public class Main
 
     public static void main(String args[])
     {
-        getHighterNumberCount();
+        getNumberIncreaseCount();
     }
 
-    public static void getHighterNumberCount()
+    public static void getNumberIncreaseCount()
     {
         List<Integer> taskNumbersList = new LinkedList<>();
         try
@@ -31,13 +31,13 @@ public class Main
             }
             scannTaskFile.close();
 
-            int retHighterNumberCounter = 0; // count all higher numbers
+            int retNumberIncreaseCounter = 0; // count all higher numbers
             int oldNumber = taskNumbersList.get(0);
             for (int currentNumber: taskNumbersList)
             {
                 if(currentNumber > oldNumber)
                 {
-                    retHighterNumberCounter ++;
+                    retNumberIncreaseCounter ++;
                     oldNumber = currentNumber;
                 }
                 else if(currentNumber < oldNumber)
@@ -47,7 +47,7 @@ public class Main
             }
 
             System.out.println("How many measurements are larger than the previous measurement?");
-            System.out.println("Answer: " + retHighterNumberCounter);
+            System.out.println("Answer: " + retNumberIncreaseCounter);
         }
         catch (Exception e)
         {

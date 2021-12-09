@@ -13,10 +13,10 @@ public class Main
 
     public static void main(String args[])
     {
-        getHighterNumberCount();
+        getNumberIncreaseCount();
     }
 
-    public static void getHighterNumberCount()
+    public static void getNumberIncreaseCount()
     {
         List<Integer> taskNumbersList = new LinkedList<>();
         try
@@ -31,7 +31,7 @@ public class Main
             }
             scannTaskFile.close();
 
-            List<Integer> groubNumbers = new LinkedList<>();
+            List<Integer> groupNumbers = new LinkedList<>();
             for(int i = 0; i < taskNumbersList.size(); i++)
             {
             /*
@@ -46,27 +46,27 @@ public class Main
 
             Stop when there aren't enough measurements left to create a new three-measurement sum!!!
              */
-                if(i+2 > taskNumbersList.size()-1)
+                if(i == taskNumbersList.size()-2)
                 {
                     break;
                 }
                 else
                 {
-                    groubNumbers.add(taskNumbersList.get(i) + taskNumbersList.get(i+1) + taskNumbersList.get(+2));
+                    groupNumbers.add(taskNumbersList.get(i) + taskNumbersList.get(i+1) + taskNumbersList.get(i+2));
 
                     String result = " = ";    String add = " + ";
                     System.out.println("Group : " + i +  result + taskNumbersList.get(i) + add + taskNumbersList.get(i+1)
-                            + add + taskNumbersList.get(i+2) + result + groubNumbers.get(i));
+                            + add + taskNumbersList.get(i+2) + result + groupNumbers.get(i));
                 }
             }
 
-            int retHighterNumberCounter = 0; // count all higher numbers
-            int oldNumber = groubNumbers.get(0);
-            for (int currentNumber: groubNumbers)
+            int retNumberIncreaseCounter = 0; // count all higher numbers
+            int oldNumber = groupNumbers.get(0);
+            for (int currentNumber: groupNumbers)
             {
                 if(currentNumber > oldNumber)
                 {
-                    retHighterNumberCounter ++;
+                    retNumberIncreaseCounter ++;
                     oldNumber = currentNumber;
                 }
                 else if(currentNumber < oldNumber)
@@ -76,7 +76,7 @@ public class Main
             }
 
             System.out.println("How many sums are larger than the previous sum?");
-            System.out.println("Answer: " + retHighterNumberCounter);
+            System.out.println("Answer: " + retNumberIncreaseCounter);
             // 1506 too low
         }
         catch (Exception e)
