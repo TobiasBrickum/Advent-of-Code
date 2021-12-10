@@ -4,6 +4,7 @@
 *.html
 *.xhtml
 *.txt
+*.ods
 
 # Compiled class file
 *.class
