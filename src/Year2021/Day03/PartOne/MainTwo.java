@@ -18,90 +18,82 @@ public class MainTwo {
 
     private static void   partOne()
     {
-        //List<Long> taskNumbersList = new LinkedList<>();
-        List<String> taskNumbersList = new LinkedList<>();
+        //List<Long> tasksInputList = new LinkedList<>();
+        List<String> tasksInputList = new LinkedList<>();
         try
         {
             File taskFile = new File(ClassLoader.getSystemResource(fileNameDirectory).toURI());
             Scanner scannTaskFile = new Scanner(taskFile);
             while(scannTaskFile.hasNextLine() == true)
             {
-                //taskNumbersList.add(Long.parseLong(scannTaskFile.nextLine()); // cut all first zeros so useless
-                taskNumbersList.add(scannTaskFile.nextLine());
+                //tasksInputList.add(Long.parseLong(scannTaskFile.nextLine()); // cut all first zeros so useless
+                tasksInputList.add(scannTaskFile.nextLine());
             }
             scannTaskFile.close();
 
-            // view scanned lines
-            for (String x : taskNumbersList )
+            // view task input
+            for (String rowInput : tasksInputList )
             {
-                System.out.println(x);
+                System.out.println(rowInput);
             }
 
-            int taskNumbersListBitCount = taskNumbersList.get(0).toString().length();
-            int[] zeroCounter = new int[taskNumbersListBitCount];
-            int[] oneCounter = new int[taskNumbersListBitCount];
+            int taskValueListRowCount = tasksInputList.get(0).toString().length();
+            int[] columnNumberZeroCounter = new int[taskValueListRowCount];
+            int[] columnNumberOneCounter = new int[taskValueListRowCount];
 
-            for (int i = 0; i < taskNumbersList.size(); i++)   // spalte
+            // loop all list columns
+            for (int i = 0; i < tasksInputList.size(); i++)
             {
-                for (int j = 0; j < taskNumbersListBitCount; j++) // index
+                // loop all index values from currently list column
+                for (int j = 0; j < taskValueListRowCount; j++)
                 {
-                    String temp;
-                    if(j == taskNumbersListBitCount -1)
+                    String temp; // save the index value from currently list column index starts 0
+                    if(j == taskValueListRowCount -1)
                     {
-                        temp = taskNumbersList.get(i).substring(j);
-                        //System.out.print(temp);
+                        temp = tasksInputList.get(i).substring(j);
                     }
                     else
                     {
-                        temp = taskNumbersList.get(i).substring(j, j+1);
-                        //System.out.print(temp);
+                        temp = tasksInputList.get(i).substring(j, j+1);
                     }
 
+                    // count for each column all row values between 0 or 1
                     if(temp.equals("0"))
                     {
-                        zeroCounter[j] ++;
+                        columnNumberZeroCounter[j] ++;
                     }
                     else
                     {
-                        oneCounter[j] ++;
+                        columnNumberOneCounter[j] ++;
                     }
                 }
             }
 
-            System.out.println("zero counter :" + Arrays.toString(zeroCounter));
-            System.out.println("one counter :" + Arrays.toString(oneCounter));
+            System.out.println("Each column number zero count :" + Arrays.toString(columnNumberZeroCounter));
+            System.out.println("Each column number one count :" + Arrays.toString(columnNumberOneCounter));
 
-            int zeroCount = 0; int oneCount = 0;
-            String resultPositiv = "";
-            String resultNegativ = "";
-
-            for (int i = 0; i < zeroCounter.length; i++)
+            String gammaRate = "";
+            String epsilonRate = "";
+            for (int i = 0; i < columnNumberZeroCounter.length; i++)
             {
-                if(zeroCounter[i] > oneCounter[i])
+                if(columnNumberZeroCounter[i] > columnNumberOneCounter[i])
                 {
-                    resultPositiv += "0";
-                    resultNegativ += "1";
+                    gammaRate += "0";
+                    epsilonRate += "1";
                 }
                 else
                 {
-                    resultPositiv += "1";
-                    resultNegativ += "0";
+                    gammaRate += "1";
+                    epsilonRate += "0";
                 }
             }
 
-            int resultPositivDecimal = Integer.parseInt(resultPositiv, 2);
-            int resultNegativvDecimal = Integer.parseInt(resultNegativ, 2);
-            int result = resultPositivDecimal * resultNegativvDecimal;
+            int gammaRateDecimal = Integer.parseInt(gammaRate, 2);
+            int epsilonRateDecimal = Integer.parseInt(epsilonRate, 2);
+            int result = gammaRateDecimal * epsilonRateDecimal;
 
             System.out.println("\nWhat do you get if you multiply your final horizontal position by your final depth?");
-            System.out.println("resultPositiv binär: " + resultPositiv);
-            System.out.println("resultNegativ binär: " + resultNegativ);
-            System.out.println("resultPositiv decimal: " + resultPositivDecimal);
-            System.out.println("resultNegativ decimal: " + resultNegativvDecimal);
-            System.out.println("resultNegativ * resultPositiv =  end result: " + result );
-
-            System.out.println("\nAnswer: " + result);
-
+            System.out.println("\nAnswer: Gamma rate * epsilon rate = " + result);
         }
         catch (Exception e)
         {
